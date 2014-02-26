@@ -1,0 +1,13 @@
+OASISFormat: 0.4
+Name:        iati-test
+Version:     0.1
+Synopsis:    parse IATI
+Authors:     Martin Keegan
+License:     AGPL-3
+Plugins:     META (0.4)
+
+Executable test_iati_xml
+  Path:       src
+  BuildTools: ocamlbuild
+  MainIs:     test_iati_xml.ml
+  BuildDepends: pcre, postgresql, ctypes.foreign, xml-light
