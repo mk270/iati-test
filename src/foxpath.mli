@@ -2,4 +2,4 @@
 type t
 
 val of_string : string -> t
-val test_data : string -> t -> bool
+val test_data : Xml.xml -> t -> bool

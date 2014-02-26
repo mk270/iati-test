@@ -13,14 +13,14 @@ open Postgresql
 open Xpath
 
 
-
-
 let handle_test_code test data =
-  let acts = Iati_xml.get_activities data in
+  let acts = Activity.all_in_string data in
   List.iter (fun activity ->
-	  print_endline (Iati_xml.idstring_of_activity activity);
-	  Foxpath.test_data activity test |> string_of_bool |> print_endline) acts
-  
+	  print_endline (Activity.to_idstring activity);
+	  Foxpath.test_data (Activity.as_xml activity) test |> 
+      string_of_bool |> 
+      print_endline) 
+  acts
 
 let read_whole_file f =
   let ic = open_in f in

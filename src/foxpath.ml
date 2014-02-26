@@ -49,7 +49,8 @@ let positive = function
 	| _ -> true
 
 let test_exists xpath data = 
-	("//" ^ xpath) |> Xpath.xpath_matching data |> positive
+	let s = Xml.to_string data in
+	("//" ^ xpath) |> Xpath.xpath_matching s |> positive
 
 let test_data data = function
 	| { fp_format = Exists xpath } -> test_exists xpath data
