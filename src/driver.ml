@@ -29,11 +29,15 @@ let get_db_cell (c : Postgresql.connection) sql i1 =
     let res = c#exec ~params sql in
     res#getvalue 0 0
 
-let get_test test_id =
+let get_db_results (c : Postgresql.connection) sql =
+	let res = c#exec sql in
+    res#get_all
+
+let get_tests_info () =
   let c = db_connection () in
-  get_db_cell c "select name from test where id > 0 and 
+  get_db_results c "select name from test where id > 0 and 
                       test_level = 1 and name like '%exists?' 
-                      and id = $1 order by id;" test_id
+                      order by id;"
 
 let run_test text test_code =
   let run_test = 
@@ -47,8 +51,12 @@ let test_file_data text tests =
   List.iter (fun test -> run_test text test) tests
 
 let activity_tests () =
-  let test_ids = [ 62; 59; ] in
+(*  let test_ids = [ 62; 59; ] in
     List.map get_test test_ids
+*)
+  get_tests_info () |>
+  Array.map (fun i -> i.(0)) |>
+  Array.to_list
 
 let run_tests filename =
   let text = read_whole_file filename
