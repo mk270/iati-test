@@ -31,11 +31,11 @@ let get_db_cell (c : Postgresql.connection) sql i1 =
     let res = c#exec ~params sql in
     res#getvalue 0 0
 
-let get_test () =
+let get_test test_id =
   let c = db_connection () in
   get_db_cell c "select name from test where id > 0 and 
                       test_level = 1 and name like '%exists?' 
-                      and id = $1 order by id;" 62
+                      and id = $1 order by id;" test_id
 
 let run_test text test_code =
   let run_test = 
@@ -47,7 +47,7 @@ let run_test text test_code =
 
 let run_tests filename =
   let text = read_whole_file filename in
-    [ get_test () ] |>
+    [ get_test 62 ] |>
     List.iter (fun test -> run_test text test)
 
 let () =
