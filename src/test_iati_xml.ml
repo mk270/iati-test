@@ -40,10 +40,9 @@ let get_test () =
 let run_tests filename =
   let test_code = get_test () in
   let tst = Test.create (Foxpath.of_string test_code) 1 in
-  let data = read_whole_file filename in
-  print_endline test_code; 
-  let acts = Activity.all_in_string data in
-    List.iter (fun act -> Test.run_activity_test tst act) acts
+    read_whole_file filename |>
+	Activity.all_in_string |>
+    List.iter (fun act -> Test.run_activity_test tst act)
 
 let () =
   (match Sys.argv with
