@@ -47,7 +47,8 @@ let run_test text test_code =
 
 let run_tests filename =
   let text = read_whole_file filename in
-    [ get_test 62 ] |>
+  let test_ids = [ 62; ] in
+    List.map get_test test_ids |>
     List.iter (fun test -> run_test text test)
 
 let () =
