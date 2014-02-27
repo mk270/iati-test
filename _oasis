@@ -9,5 +9,5 @@ Plugins:     META (0.4)
 Executable test_iati_xml
   Path:       src
   BuildTools: ocamlbuild
-  MainIs:     test_iati_xml.ml
+  MainIs:     driver.ml
   BuildDepends: pcre, postgresql, ctypes.foreign, xml-light

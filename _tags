@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 9b129c878af6890a79cb418c01612874)
+# DO NOT EDIT (digest: b20230a206379e116eb86f89b5c763b7)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -14,10 +14,10 @@
 "_darcs": -traverse
 "_darcs": not_hygienic
 # Executable test_iati_xml
-"src/test_iati_xml.byte": pkg_ctypes.foreign
-"src/test_iati_xml.byte": pkg_pcre
-"src/test_iati_xml.byte": pkg_postgresql
-"src/test_iati_xml.byte": pkg_xml-light
+"src/driver.byte": pkg_ctypes.foreign
+"src/driver.byte": pkg_pcre
+"src/driver.byte": pkg_postgresql
+"src/driver.byte": pkg_xml-light
 <src/*.ml{,i}>: pkg_ctypes.foreign
 <src/*.ml{,i}>: pkg_pcre
 <src/*.ml{,i}>: pkg_postgresql
