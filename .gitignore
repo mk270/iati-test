@@ -3,3 +3,5 @@ myocamlbuild.ml
 setup.ml
 *.byte
 *~
+setup.data
+setup.log
