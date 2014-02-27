@@ -5,3 +5,5 @@ setup.ml
 *~
 setup.data
 setup.log
+*.o
+*.so
