@@ -37,18 +37,18 @@ let get_test () =
                       test_level = 1 and name like '%exists?' 
                       and id = $1 order by id;" 62
 
-let run_test filename test_code =
+let run_test text test_code =
   let run_test = 
 	  Test.create (Foxpath.of_string test_code) 1 |>
 	  Test.run_activity_test
   in
-    read_whole_file filename |>
-	Activity.all_in_string |>
+	Activity.all_in_string text |>
     List.iter run_test
 
 let run_tests filename =
-	[ get_test () ] |>
-	List.iter (fun test -> run_test filename test)
+  let text = read_whole_file filename in
+    [ get_test () ] |>
+    List.iter (fun test -> run_test text test)
 
 let () =
   (match Sys.argv with
