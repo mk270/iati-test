@@ -1,12 +1,10 @@
 
 (*
-  read foxpath tests ; parse them with regexps
+  save to db
 
-  run test against requiste xml thingy
+  handle all 17 foxpath variants
 
-  execute xquery match (whatever that means)
-
-  read/write postgres
+  handle all 4 test levels
 *)
 
 open Postgresql
@@ -45,17 +43,26 @@ let run_test text test_code =
 	Activity.all_in_string text |>
     List.iter run_test
 
-let run_tests filename =
-  let text = read_whole_file filename in
+let test_file_data text tests =
+  List.iter (fun test -> run_test text test) tests
+
+let activity_tests () =
   let test_ids = [ 62; 59; ] in
-    List.map get_test test_ids |>
-    List.iter (fun test -> run_test text test)
+    List.map get_test test_ids
+
+let run_tests filename =
+  let text = read_whole_file filename
+  and tests = activity_tests () in
+    test_file_data text tests
+
+let cleanup_after_output () =
+  print_endline "";
+  flush stdout
 
 let () =
   (match Sys.argv with
   | [| _; filename |] -> run_tests filename
   | _ -> print_endline "Usage: $0 filename"
   );
-  print_endline "";
-  flush stdout
+  cleanup_after_output ()
   
