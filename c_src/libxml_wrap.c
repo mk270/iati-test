@@ -21,7 +21,6 @@ int execute_xpath_str_on_memory(const char *s, char *xpathExp)
 	xmlDocPtr doc;
 
 	len = strlen(s);
-	fprintf(stderr, "%d [%s]\n", len, xpathExp);
 	doc = xmlParseMemory(s, len);
 	if(doc == NULL) {
 		return -1;
