@@ -36,7 +36,7 @@ let get_db_results (c : Postgresql.connection) sql =
 let get_tests_info () =
   let c = db_connection () in
   get_db_results c "select name from test where id > 0 and 
-                      test_level = 1 and name like '%exists?' 
+                      test_level = 1 and name like '%exists?' and name like '%text%' 
                       order by id;"
 
 let run_test text test_code =
@@ -51,9 +51,6 @@ let test_file_data text tests =
   List.iter (fun test -> run_test text test) tests
 
 let activity_tests () =
-(*  let test_ids = [ 62; 59; ] in
-    List.map get_test test_ids
-*)
   get_tests_info () |>
   Array.map (fun i -> i.(0)) |>
   Array.to_list

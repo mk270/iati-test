@@ -56,3 +56,8 @@ let test_data data = function
 	| { fp_format = Exists xpath } -> test_exists xpath data
 (*	| _ -> raise Not_implemented *)
 	
+let string_of_format = function
+	| Exists s -> Printf.sprintf "<format: \"%s\">" s
+
+let to_string fp =
+	Printf.sprintf "<< foxpath: %s %s >>" fp.fp_text (string_of_format fp.fp_format)
